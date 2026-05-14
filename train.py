@@ -243,7 +243,7 @@ if hasattr(best_model, 'feature_importances_'):
     plt.tight_layout()
     plt.savefig("outputs/feature_importance.png", dpi=150, bbox_inches='tight')
     plt.close()
-    print("📊 Figure 4 sauvegardée : outputs/feature_importance.png")
+    print(" Figure 4 sauvegardée : outputs/feature_importance.png")
 
 # --- Sauvegarder les résultats ---
 results_df.to_csv("outputs/resultats_modeles.csv", index=False)
