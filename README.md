@@ -1,6 +1,6 @@
-# 🏦 Projet 5 - Prédiction de Défaut de Prêt Bancaire
+#  Projet 5 - Prédiction de Défaut de Prêt Bancaire
 
-## 📋 Description
+##  Description
 
 Ce projet prédit la probabilité qu'un client fasse défaut sur son prêt bancaire, en comparant **8 modèles de classification** et en déployant le meilleur via une API FastAPI containerisée avec Docker.
 
@@ -33,7 +33,7 @@ credit-default-project/
 
 ---
 
-## 🚀 Lancement rapide
+##  Lancement rapide
 
 ### 1. Entraîner les modèles
 
@@ -62,7 +62,7 @@ L'API est disponible sur : http://localhost:8000
 
 ---
 
-## 📊 Modèles comparés
+##  Modèles comparés
 
 | Modèle | Accuracy | F1-Score | AUC-ROC |
 |--------|----------|----------|---------|
@@ -75,11 +75,11 @@ L'API est disponible sur : http://localhost:8000
 | Logistic Regression | 90.8% | 0.6567 | 0.9655 |
 | Naive Bayes | 87.3% | 0.5606 | 0.9262 |
 
-**🏆 Meilleur modèle : XGBoost (AUC-ROC = 0.999)**
+** Meilleur modèle : XGBoost (AUC-ROC = 0.999)**
 
 ---
 
-## 🧩 Utilité et limites de chaque modèle
+##  Utilité et limites de chaque modèle
 
 ### 1. Régression Logistique
 **Utilité** : Modèle de référence simple et rapide. Très utilisé en banque car il produit des résultats facilement interprétables et explicables aux régulateurs. Idéal pour comprendre l'impact de chaque variable sur le risque de défaut.
@@ -123,7 +123,7 @@ L'API est disponible sur : http://localhost:8000
 
 ---
 
-### 7. XGBoost 🏆
+### 7. XGBoost 
 **Utilité** : Version optimisée du Gradient Boosting, beaucoup plus rapide grâce à la parallélisation. Standard de l'industrie pour les compétitions ML et la production. Gère nativement les valeurs manquantes et les données déséquilibrées. **Meilleur modèle de ce projet (AUC = 0.999).**
 
 **Limites** : Nombreux hyperparamètres à tuner. Peut être une boîte noire difficile à expliquer aux non-techniciens. Nécessite plus de ressources que les modèles simples.
@@ -137,7 +137,7 @@ L'API est disponible sur : http://localhost:8000
 
 ---
 
-## 🔌 Utilisation de l'API
+##  Utilisation de l'API
 
 ### Prédiction simple
 
@@ -167,7 +167,7 @@ curl -X POST "http://localhost:8000/predict" \
   "prediction_label": "Pas de défaut",
   "probability_default": 0.023,
   "probability_no_default": 0.977,
-  "risk_level": "🟢 Faible",
+  "risk_level": " Faible",
   "model_used": "XGBoost"
 }
 ```
@@ -178,7 +178,7 @@ Accéder à : **http://localhost:8000/docs** (Swagger UI)
 
 ---
 
-## 🧠 Features utilisées
+##  Features utilisées
 
 | Feature | Description |
 |---------|-------------|
@@ -196,7 +196,7 @@ Accéder à : **http://localhost:8000/docs** (Swagger UI)
 
 ---
 
-## ⚙️ Techniques appliquées
+##  Techniques appliquées
 
 - **SMOTE** : Sur-échantillonnage pour gérer le déséquilibre des classes (9.6% de défauts)
 - **StandardScaler** : Normalisation des features
@@ -205,7 +205,7 @@ Accéder à : **http://localhost:8000/docs** (Swagger UI)
 
 ---
 
-## 🐳 Docker
+##  Docker
 
 ```bash
 # Build
