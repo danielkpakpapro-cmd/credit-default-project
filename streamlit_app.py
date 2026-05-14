@@ -13,8 +13,8 @@ import os
 
 # ─── Configuration de la page ───────────────────────────────
 st.set_page_config(
-    page_title="🏦 Prédiction Défaut de Prêt",
-    page_icon="🏦",
+    page_title=" Prédiction Défaut de Prêt",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded",
 )
