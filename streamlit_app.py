@@ -76,8 +76,8 @@ df = load_data()
 # ─── Sidebar ─────────────────────────────────────────────────
 with st.sidebar:
     st.image("https://img.icons8.com/color/96/bank-building.png", width=80)
-    st.markdown("## 🏦 Navigation")
-    page = st.radio("", ["🔮 Prédiction", "📊 Analyse du Dataset", "🤖 Comparaison Modèles", "📖 À propos"])
+    st.markdown("##  Navigation")
+    page = st.radio("", [" Prédiction", " Analyse du Dataset", " Comparaison Modèles", " À propos"])
     st.markdown("---")
     st.markdown(f"**Modèle actif :** `{model_name}`")
     st.markdown(f"**Dataset :** `{len(df)} clients`")
@@ -86,37 +86,37 @@ with st.sidebar:
 # ═══════════════════════════════════════════════════════════════
 # PAGE 1 : PRÉDICTION
 # ═══════════════════════════════════════════════════════════════
-if page == "🔮 Prédiction":
-    st.markdown('<div class="main-title">🏦 Prédiction de Défaut de Prêt</div>', unsafe_allow_html=True)
+if page == " Prédiction":
+    st.markdown('<div class="main-title"> Prédiction de Défaut de Prêt</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle">Entrez les informations du client pour évaluer son risque de défaut</div>', unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown("#### 👤 Profil Client")
+        st.markdown("####  Profil Client")
         age        = st.slider("Âge", 18, 70, 35)
         experience = st.slider("Expérience (années)", 0, 50, 10)
         education  = st.selectbox("Niveau d'éducation", [1, 2, 3],
                                    format_func=lambda x: {1: "🎓 Lycée", 2: "🎓 Licence", 3: "🎓 Master+"}[x])
         family     = st.selectbox("Taille de la famille", [1, 2, 3, 4],
-                                   format_func=lambda x: f"👨‍👩‍👧 {x} personne(s)")
+                                   format_func=lambda x: f" {x} personne(s)")
 
     with col2:
-        st.markdown("#### 💰 Situation Financière")
+        st.markdown("####  Situation Financière")
         income   = st.number_input("Revenu annuel (milliers $)", 0, 500, 80, step=5)
         ccavg    = st.number_input("Dépenses CB/mois (milliers $)", 0.0, 20.0, 2.5, step=0.1)
         mortgage = st.number_input("Prêt immobilier (milliers $)", 0, 700, 0, step=10)
 
     with col3:
-        st.markdown("#### 🏦 Produits Bancaires")
-        securities = st.toggle("📈 Compte Titres")
-        cd_account = st.toggle("💳 Compte Dépôt à Terme")
-        online     = st.toggle("🌐 Banque en Ligne", value=True)
-        creditcard = st.toggle("💰 Carte de Crédit Banque")
+        st.markdown("####  Produits Bancaires")
+        securities = st.toggle(" Compte Titres")
+        cd_account = st.toggle(" Compte Dépôt à Terme")
+        online     = st.toggle(" Banque en Ligne", value=True)
+        creditcard = st.toggle(" Carte de Crédit Banque")
 
     st.markdown("---")
 
-    if st.button("🔮 Prédire le Risque", use_container_width=True, type="primary"):
+    if st.button(" Prédire le Risque", use_container_width=True, type="primary"):
         input_dict = {
             "Age": age, "Experience": experience, "Income": income,
             "Family": family, "CCAvg": ccavg, "Education": education,
@@ -139,16 +139,16 @@ if page == "🔮 Prédiction":
 
         # Niveau de risque
         if prob_default < 0.2:
-            st.markdown('<div class="risk-low">🟢 RISQUE FAIBLE — Prêt recommandé</div>', unsafe_allow_html=True)
+            st.markdown('<div class="risk-low"> RISQUE FAIBLE — Prêt recommandé</div>', unsafe_allow_html=True)
         elif prob_default < 0.5:
-            st.markdown('<div class="risk-medium">🟡 RISQUE MODÉRÉ — Analyse approfondie conseillée</div>', unsafe_allow_html=True)
+            st.markdown('<div class="risk-medium"> RISQUE MODÉRÉ — Analyse approfondie conseillée</div>', unsafe_allow_html=True)
         elif prob_default < 0.75:
-            st.markdown('<div class="risk-high">🟠 RISQUE ÉLEVÉ — Garanties supplémentaires requises</div>', unsafe_allow_html=True)
+            st.markdown('<div class="risk-high"> RISQUE ÉLEVÉ — Garanties supplémentaires requises</div>', unsafe_allow_html=True)
         else:
-            st.markdown('<div class="risk-critical">🔴 RISQUE TRÈS ÉLEVÉ — Prêt déconseillé</div>', unsafe_allow_html=True)
+            st.markdown('<div class="risk-critical"> RISQUE TRÈS ÉLEVÉ — Prêt déconseillé</div>', unsafe_allow_html=True)
 
         # Jauge de probabilité
-        st.markdown("#### 📊 Probabilité de défaut")
+        st.markdown("#### Probabilité de défaut")
         fig, ax = plt.subplots(figsize=(8, 1.2))
         color = "#2e7d32" if prob_default < 0.2 else "#f57f17" if prob_default < 0.5 else "#e65100" if prob_default < 0.75 else "#b71c1c"
         ax.barh(0, prob_default, color=color, height=0.5)
@@ -165,18 +165,18 @@ if page == "🔮 Prédiction":
 # ═══════════════════════════════════════════════════════════════
 # PAGE 2 : ANALYSE DU DATASET
 # ═══════════════════════════════════════════════════════════════
-elif page == "📊 Analyse du Dataset":
-    st.markdown('<div class="main-title">📊 Analyse Exploratoire du Dataset</div>', unsafe_allow_html=True)
+elif page == " Analyse du Dataset":
+    st.markdown('<div class="main-title"> Analyse Exploratoire du Dataset</div>', unsafe_allow_html=True)
 
     # KPIs
     k1, k2, k3, k4 = st.columns(4)
-    k1.metric("📁 Total clients", f"{len(df):,}")
-    k2.metric("✅ Sans défaut", f"{(df['Personal Loan']==0).sum():,}")
-    k3.metric("❌ Avec défaut", f"{(df['Personal Loan']==1).sum():,}")
-    k4.metric("📉 Taux de défaut", f"{df['Personal Loan'].mean()*100:.1f}%")
+    k1.metric(" Total clients", f"{len(df):,}")
+    k2.metric(" Sans défaut", f"{(df['Personal Loan']==0).sum():,}")
+    k3.metric(" Avec défaut", f"{(df['Personal Loan']==1).sum():,}")
+    k4.metric(" Taux de défaut", f"{df['Personal Loan'].mean()*100:.1f}%")
 
     st.markdown("---")
-    tab1, tab2, tab3 = st.tabs(["📈 Distributions", "🔗 Corrélations", "📋 Données brutes"])
+    tab1, tab2, tab3 = st.tabs([" Distributions", " Corrélations", " Données brutes"])
 
     with tab1:
         col1, col2 = st.columns(2)
@@ -237,8 +237,8 @@ elif page == "📊 Analyse du Dataset":
 # ═══════════════════════════════════════════════════════════════
 # PAGE 3 : COMPARAISON MODÈLES
 # ═══════════════════════════════════════════════════════════════
-elif page == "🤖 Comparaison Modèles":
-    st.markdown('<div class="main-title">🤖 Comparaison des Modèles</div>', unsafe_allow_html=True)
+elif page == " Comparaison Modèles":
+    st.markdown('<div class="main-title"> Comparaison des Modèles</div>', unsafe_allow_html=True)
 
     results = pd.DataFrame({
         "Modèle": ["XGBoost", "LightGBM", "Random Forest", "Gradient Boosting", "SVM", "KNN", "Logistic Regression", "Naive Bayes"],
@@ -286,7 +286,7 @@ elif page == "🤖 Comparaison Modèles":
 
     # Afficher les images générées
     st.markdown("---")
-    st.markdown("### 📈 Visualisations générées lors de l'entraînement")
+    st.markdown("###  Visualisations générées lors de l'entraînement")
     img_col1, img_col2 = st.columns(2)
     outputs = BASE_DIR / "outputs"
     if (outputs / "roc_curves.png").exists():
@@ -301,31 +301,31 @@ elif page == "🤖 Comparaison Modèles":
 # ═══════════════════════════════════════════════════════════════
 # PAGE 4 : À PROPOS
 # ═══════════════════════════════════════════════════════════════
-elif page == "📖 À propos":
-    st.markdown('<div class="main-title">📖 À propos du Projet</div>', unsafe_allow_html=True)
+elif page == " À propos":
+    st.markdown('<div class="main-title"> À propos du Projet</div>', unsafe_allow_html=True)
 
     st.markdown("""
-    ## 🎯 Objectif
+    ##  Objectif
     Ce projet prédit la probabilité qu'un client fasse **défaut sur son prêt bancaire**, en comparant 8 modèles de classification et en déployant le meilleur via une API FastAPI et une interface Streamlit.
 
-    ## 📦 Dataset
+    ##  Dataset
     - **Source** : [Kaggle - Bank Personal Loan Modelling](https://www.kaggle.com/datasets/itsmesunil/bank-loanmodelling)
     - **5 000 clients**, 14 variables
     - **9.6% de défauts** (dataset déséquilibré → SMOTE appliqué)
 
-    ## ⚙️ Pipeline
+    ##  Pipeline
     1. **Preprocessing** : nettoyage, SMOTE, StandardScaler
     2. **Entraînement** : 8 modèles comparés avec cross-validation 5 folds
     3. **Évaluation** : Accuracy, Precision, Recall, F1-Score, AUC-ROC
     4. **Déploiement** : API FastAPI + Interface Streamlit + Docker
 
-    ## 🏆 Résultats
+    ##  Résultats
     | Modèle | AUC-ROC |
     |--------|---------|
-    | **XGBoost** 🥇 | **0.999** |
+    | **XGBoost**  | **0.999** |
     | LightGBM | 0.999 |
     | Random Forest | 0.999 |
 
-    ## 🛠️ Technologies
+    ##  Technologies
     `Python` `Scikit-learn` `XGBoost` `LightGBM` `FastAPI` `Streamlit` `Docker` `SMOTE`
     """)
