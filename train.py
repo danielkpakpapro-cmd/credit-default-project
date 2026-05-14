@@ -36,8 +36,8 @@ print("=" * 60)
 DATA_PATH = "data/Bank_Personal_Loan_Modelling.xlsx"
 df = pd.read_excel(DATA_PATH, sheet_name="Data")
 
-print(f"\n📊 Dataset shape : {df.shape}")
-print(f"📋 Colonnes : {list(df.columns)}")
+print(f"\n Dataset shape : {df.shape}")
+print(f" Colonnes : {list(df.columns)}")
 print(f"\nTarget distribution:\n{df['Personal Loan'].value_counts()}")
 print(f"\nProportion défaut : {df['Personal Loan'].mean()*100:.1f}%")
 
@@ -108,7 +108,7 @@ results = []
 cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
 for name, model in models.items():
-    print(f"\n🔄 Entraînement : {name}...")
+    print(f"\n Entraînement : {name}...")
     model.fit(X_train_sm, y_train_sm)
     
     y_pred = model.predict(X_test_scaled)
@@ -135,7 +135,7 @@ for name, model in models.items():
         "CV-AUC (std)": round(cv_scores.std(), 4),
     })
     
-    print(f"   ✅ Accuracy={acc:.4f} | F1={f1:.4f} | AUC={auc:.4f} | CV-AUC={cv_scores.mean():.4f}±{cv_scores.std():.4f}")
+    print(f"    Accuracy={acc:.4f} | F1={f1:.4f} | AUC={auc:.4f} | CV-AUC={cv_scores.mean():.4f}±{cv_scores.std():.4f}")
 
 # ─────────────────────────────────────────
 # 5. TABLEAU DE COMPARAISON
@@ -151,13 +151,13 @@ print(results_df.to_string(index=False))
 # ─────────────────────────────────────────
 best_model_name = results_df.iloc[0]["Modèle"]
 best_model = models[best_model_name]
-print(f"\n🏆 Meilleur modèle : {best_model_name}")
+print(f"\n Meilleur modèle : {best_model_name}")
 print(f"   AUC-ROC = {results_df.iloc[0]['AUC-ROC']}")
 
 # Sauvegarder le meilleur modèle
 joblib.dump(best_model, "models/best_model.pkl")
 joblib.dump(best_model_name, "models/best_model_name.pkl")
-print(f"   ✅ Modèle sauvegardé dans models/best_model.pkl")
+print(f"    Modèle sauvegardé dans models/best_model.pkl")
 
 # ─────────────────────────────────────────
 # 7. VISUALISATIONS
@@ -195,7 +195,7 @@ for bar, val in zip(bars, results_df["AUC-ROC"][::-1]):
 plt.tight_layout()
 plt.savefig("outputs/comparaison_modeles.png", dpi=150, bbox_inches='tight')
 plt.close()
-print("\n📊 Figure 1 sauvegardée : outputs/comparaison_modeles.png")
+print("\n Figure 1 sauvegardée : outputs/comparaison_modeles.png")
 
 # --- Figure 2 : ROC Curves ---
 fig, ax = plt.subplots(figsize=(10, 7))
@@ -214,7 +214,7 @@ ax.grid(alpha=0.3)
 plt.tight_layout()
 plt.savefig("outputs/roc_curves.png", dpi=150, bbox_inches='tight')
 plt.close()
-print("📊 Figure 2 sauvegardée : outputs/roc_curves.png")
+print(" Figure 2 sauvegardée : outputs/roc_curves.png")
 
 # --- Figure 3 : Confusion Matrix du meilleur modèle ---
 y_pred_best = best_model.predict(X_test_scaled)
@@ -229,7 +229,7 @@ ax.set_xlabel("Valeur Prédite")
 plt.tight_layout()
 plt.savefig("outputs/confusion_matrix.png", dpi=150, bbox_inches='tight')
 plt.close()
-print("📊 Figure 3 sauvegardée : outputs/confusion_matrix.png")
+print(" Figure 3 sauvegardée : outputs/confusion_matrix.png")
 
 # --- Figure 4 : Feature Importance (si Random Forest ou XGBoost) ---
 if hasattr(best_model, 'feature_importances_'):
@@ -247,10 +247,10 @@ if hasattr(best_model, 'feature_importances_'):
 
 # --- Sauvegarder les résultats ---
 results_df.to_csv("outputs/resultats_modeles.csv", index=False)
-print("\n✅ Résultats sauvegardés dans outputs/resultats_modeles.csv")
+print("\n Résultats sauvegardés dans outputs/resultats_modeles.csv")
 
 print("\n" + "="*60)
 print("  ENTRAÎNEMENT TERMINÉ !")
-print(f"  🏆 Meilleur modèle : {best_model_name}")
-print(f"  📁 Modèle sauvegardé : models/best_model.pkl")
+print(f"   Meilleur modèle : {best_model_name}")
+print(f"   Modèle sauvegardé : models/best_model.pkl")
 print("="*60)
