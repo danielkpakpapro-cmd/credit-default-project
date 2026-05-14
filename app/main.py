@@ -21,7 +21,7 @@ model_name   = joblib.load(os.path.join(BASE_DIR, "models", "best_model_name.pkl
 
 # ─── App FastAPI ─────────────────────────────────────────────
 app = FastAPI(
-    title="🏦 API - Prédiction Défaut de Prêt",
+    title=" API - Prédiction Défaut de Prêt",
     description=f"""
 API de prédiction du risque de défaut de prêt bancaire.
 - **Modèle utilisé** : {model_name}
@@ -57,7 +57,7 @@ class PredictionResponse(BaseModel):
 @app.get("/", tags=["Info"])
 def root():
     return {
-        "message": "🏦 API Prédiction Défaut de Prêt Bancaire",
+        "message": " API Prédiction Défaut de Prêt Bancaire",
         "model": model_name,
         "version": "1.0.0",
         "endpoints": {
@@ -101,13 +101,13 @@ def predict(client: ClientData):
 
         # Niveau de risque
         if prob_default < 0.2:
-            risk_level = "🟢 Faible"
+            risk_level = " Faible"
         elif prob_default < 0.5:
-            risk_level = "🟡 Modéré"
+            risk_level = " Modéré"
         elif prob_default < 0.75:
-            risk_level = "🟠 Élevé"
+            risk_level = " Élevé"
         else:
-            risk_level = "🔴 Très élevé"
+            risk_level = " Très élevé"
 
         return PredictionResponse(
             prediction=pred,
